@@ -2,11 +2,16 @@ package com.niduc;
 
 import javafx.animation.AnimationTimer;
 
+import java.util.ArrayList;
+
 public class SimulationController {
     private static int time = 0;
     private static int simulationFramerate = 100;
     private static long lastFrame = 0;
     private static boolean isRunning = false;
+
+    private static ArrayList<Sensor> sensors;
+
     private static MainViewController mainViewController;
 
     private final static AnimationTimer animationTimer = new AnimationTimer() {
@@ -24,6 +29,7 @@ public class SimulationController {
      */
     public static void setup() {
         SimulationController.time = 0;
+        SimulationController.sensors = new ArrayList<>();
     }
 
     /**
@@ -58,5 +64,13 @@ public class SimulationController {
 
     public static void setSimulationFramerate(int simulationFramerate) {
         SimulationController.simulationFramerate = simulationFramerate;
+    }
+
+    public static ArrayList<Sensor> getSensors() {
+        return SimulationController.sensors;
+    }
+
+    public static void addSensor(Sensor sensor) {
+        SimulationController.sensors.add(sensor);
     }
 }

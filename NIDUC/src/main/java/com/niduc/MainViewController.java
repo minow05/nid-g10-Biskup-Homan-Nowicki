@@ -11,6 +11,12 @@ public class MainViewController {
     @FXML public Button pauseButton;
     @FXML public Slider simulationSpeedSlider;
 
+    @FXML public Button sensorAddButton;
+
+    @FXML public Button algorithmChangeButton;
+
+    @FXML public Button signalChangeButton;
+
     private boolean isRunning = false;
     private boolean isPaused = false;
 
@@ -50,5 +56,17 @@ public class MainViewController {
         this.isPaused = false;
         this.pauseButton.setText("Pause");
         SimulationController.run();
+    }
+
+    public void addSensor(ActionEvent actionEvent) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void changeAlgorithm(ActionEvent actionEvent) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void changeSignal(ActionEvent actionEvent) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
