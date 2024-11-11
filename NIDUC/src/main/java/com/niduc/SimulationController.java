@@ -1,5 +1,6 @@
 package com.niduc;
 
+import com.niduc.sensors.Sensor;
 import javafx.animation.AnimationTimer;
 
 import java.util.ArrayList;

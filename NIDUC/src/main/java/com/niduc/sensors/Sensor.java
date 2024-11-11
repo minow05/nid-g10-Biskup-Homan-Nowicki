@@ -1,4 +1,4 @@
-package com.niduc;
+package com.niduc.sensors;
 
 public abstract class Sensor {
 //PUBIC APSTRAKT KLAS
