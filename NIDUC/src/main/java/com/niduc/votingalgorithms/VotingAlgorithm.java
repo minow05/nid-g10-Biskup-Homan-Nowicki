@@ -4,6 +4,7 @@ import com.niduc.Parameter;
 import com.niduc.sensors.Sensor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class VotingAlgorithm {
@@ -27,6 +28,15 @@ public abstract class VotingAlgorithm {
      * @param parameters map of parameter IDs and values to be assigned
      */
     public abstract void setParameterValues(Map<String, Object> parameters);
+
+    /**
+     * Sets value of an assignable parameter for this Voting Algorithm
+     * @param parameterID parameter ID
+     * @param value value to set
+     */
+    public void setParameterValue(String parameterID, Object value) {
+        this.setParameterValues(Map.of(parameterID, value));
+    }
 
     /**
      * Votes for the best value to return based on list of sensor outputs

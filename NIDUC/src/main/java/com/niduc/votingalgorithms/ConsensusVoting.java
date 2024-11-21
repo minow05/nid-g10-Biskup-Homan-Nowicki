@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class ConsensusVoting extends VotingAlgorithm {
     public static final String displayName = "Consensus Voting Algorithm";
+    public static final String description = "This voting algorithm groups similar outputs together based on a set closeness threshold. It selects the largest group, and if it has more than half of all outputs, any result from this group can be chosen as the consensus answer.";
 
     private float allowedDifference = 10f;
     private static final ArrayList<Parameter> parameters = new ArrayList<>(

@@ -25,6 +25,7 @@ public class Main extends Application {
         dupa.setParameterValues(Map.of("allowedDifference", 37.21f));
         System.out.println(ConsensusVoting.displayName);
         System.out.println(dupa.getParameterValues().get("allowedDifference"));
+        System.out.println(ConsensusVoting.description);
     }
 
     public static void main(String[] args) {
