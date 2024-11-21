@@ -4,7 +4,6 @@ import com.niduc.Parameter;
 import com.niduc.sensors.Sensor;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public abstract class VotingAlgorithm {

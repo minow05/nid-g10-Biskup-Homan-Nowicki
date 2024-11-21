@@ -1,5 +1,7 @@
 package com.niduc;
 
+import com.niduc.sensors.Sensor;
+import com.niduc.sensors.SensorTest;
 import com.niduc.votingalgorithms.ConsensusVoting;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Main extends Application {
@@ -21,11 +24,21 @@ public class Main extends Application {
 
 
         // This part of start method is used for testing purposes
-        ConsensusVoting dupa = new ConsensusVoting();
-        dupa.setParameterValues(Map.of("allowedDifference", 37.21f));
-        System.out.println(ConsensusVoting.displayName);
-        System.out.println(dupa.getParameterValues().get("allowedDifference"));
-        System.out.println(ConsensusVoting.description);
+        ArrayList<Sensor> sensors = new ArrayList<>();
+        sensors.add(new SensorTest());
+        ((SensorTest)sensors.getLast()).test__setHeight(0.18230f);
+        sensors.add(new SensorTest());
+        ((SensorTest)sensors.getLast()).test__setHeight(0.18130f);
+        sensors.add(new SensorTest());
+        ((SensorTest)sensors.getLast()).test__setHeight(0.18180f);
+        sensors.add(new SensorTest());
+        ((SensorTest)sensors.getLast()).test__setHeight(0.18235f);
+        sensors.add(new SensorTest());
+        ((SensorTest)sensors.getLast()).test__setHeight(0.18155f);
+        ConsensusVoting cv = new ConsensusVoting();
+        cv.setParameterValue("allowedDifference", 0.0005f);
+        System.out.println(cv.vote(sensors));
+
     }
 
     public static void main(String[] args) {
