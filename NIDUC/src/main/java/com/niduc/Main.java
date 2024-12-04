@@ -3,6 +3,7 @@ package com.niduc;
 import com.niduc.sensors.Sensor;
 import com.niduc.sensors.SensorTest;
 import com.niduc.votingalgorithms.ConsensusVoting;
+import com.niduc.votingalgorithms.GeneralizedMedianVoting;
 import com.niduc.votingalgorithms.WeightedAveragingAlgorithm;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -38,11 +39,12 @@ public class Main extends Application {
         ((SensorTest)sensors.getLast()).test__setHeight(0.18155f);
         ConsensusVoting cv = new ConsensusVoting();
         WeightedAveragingAlgorithm waa = new WeightedAveragingAlgorithm();
+        GeneralizedMedianVoting gmv = new GeneralizedMedianVoting();
         waa.setParameterValue("scalingConstant", 1.0f);
         cv.setParameterValue("allowedDifference", 0.0005f);
         System.out.println(cv.vote(sensors));
         System.out.println(waa.vote(sensors));
-
+        System.out.println(gmv.vote(sensors));
     }
 
     public static void main(String[] args) {

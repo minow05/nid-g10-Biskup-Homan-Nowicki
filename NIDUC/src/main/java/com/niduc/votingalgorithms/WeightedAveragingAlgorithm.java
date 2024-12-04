@@ -75,7 +75,7 @@ public class WeightedAveragingAlgorithm extends VotingAlgorithm {
         for (int i = 0; i < n; i++) {
             weights[i] /= weightSum;
         }
-        
+
         float result = 0;
         for (int i = 0; i < n; i++) {
             result += weights[i] * sensorOutputs.get(i);
