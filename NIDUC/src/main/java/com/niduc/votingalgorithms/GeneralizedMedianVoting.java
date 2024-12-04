@@ -68,7 +68,7 @@ public class GeneralizedMedianVoting extends VotingAlgorithm {
 
         // Return the final remaining value
         try {
-            return sensorOutputs.get(0);
+            return sensorOutputs.getFirst();
         } catch (NoSuchElementException e) {
             System.err.println("GeneralizedMedianVoting.vote() called without any sensor outputs.");
             return Float.MIN_VALUE; // Default value in case of error
