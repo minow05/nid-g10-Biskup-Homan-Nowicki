@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public abstract class VotingAlgorithm {
-    public static final String displayName = "Some idiot didn't override it in subclass";
-    public static final String description = "Some idiot didn't override it in subclass";
+    public abstract String getDisplayName();
+    public abstract String getDescription();
 
     /**
      * Return list of assignable parameters for this Voting Algorithm
@@ -43,4 +43,6 @@ public abstract class VotingAlgorithm {
      * @return voted best value
      */
     public abstract float vote(ArrayList<Sensor> sensors);
+
+    public String toString() { return this.getDisplayName(); }
 }

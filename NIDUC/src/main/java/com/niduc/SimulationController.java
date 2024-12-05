@@ -1,6 +1,8 @@
 package com.niduc;
 
 import com.niduc.sensors.Sensor;
+import com.niduc.votingalgorithms.ConsensusVoting;
+import com.niduc.votingalgorithms.VotingAlgorithm;
 import javafx.animation.AnimationTimer;
 
 import java.util.ArrayList;
@@ -11,6 +13,10 @@ public class SimulationController {
     private static long lastFrame = 0;
     private static boolean isRunning = false;
 
+    public static final ArrayList<VotingAlgorithm> votingAlgorithms = new ArrayList<>() {{
+        add(new ConsensusVoting());
+    }};
+    private static VotingAlgorithm currentVotingAlgorithm;
     private static ArrayList<Sensor> sensors;
 
     private static MainViewController mainViewController;
@@ -73,5 +79,13 @@ public class SimulationController {
 
     public static void addSensor(Sensor sensor) {
         SimulationController.sensors.add(sensor);
+    }
+
+    public static VotingAlgorithm getCurrentVotingAlgorithm() {
+        return currentVotingAlgorithm;
+    }
+
+    public static void setCurrentVotingAlgorithm(VotingAlgorithm currentVotingAlgorithm) {
+        SimulationController.currentVotingAlgorithm = currentVotingAlgorithm;
     }
 }
