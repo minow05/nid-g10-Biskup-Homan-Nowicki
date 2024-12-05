@@ -23,14 +23,22 @@ public class MainViewController {
     @FXML public ComboBox<VotingAlgorithm> votingAlgorithmComboBox;
     @FXML public GridPane votingAlgorithmParametersGridPane;
     @FXML public Text votingAlgorithmDescription;
+    @FXML public Label votedValueLabel;
+    @FXML public Label inputLabel;
     private ArrayList<Parameter> votingAlgorithmParameters;
 
 
     private boolean isRunning = false;
     private boolean isPaused = false;
 
+    public void update() {
+        this.votedValueLabel.setText(SimulationController.getVotedValue().toString());
+        this.inputLabel.setText(((Float)SimulationController.getInputSignal().getHeight()).toString());
+    }
+
     @FXML
     public void initialize() {
+        SimulationController.setMainViewController(this);
         simulationSpeedSlider.setValue(SimulationController.getSimulationFramerate());
         simulationSpeedSlider.valueProperty().addListener((observable, oldValue, newValue) -> {SimulationController.setSimulationFramerate(newValue.intValue());});
         this.initializeVotingAlgorithmComboBox();
@@ -96,10 +104,6 @@ public class MainViewController {
     }
 
     public void addSensor(ActionEvent actionEvent) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void changeAlgorithm(ActionEvent actionEvent) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

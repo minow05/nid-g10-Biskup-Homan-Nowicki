@@ -1,5 +1,9 @@
 package com.niduc;
 
+import com.niduc.errormodels.BiasError;
+import com.niduc.errormodels.DriftError;
+import com.niduc.errormodels.IntermittentDropoutError;
+import com.niduc.errormodels.RandomNoiseError;
 import com.niduc.sensors.Sensor;
 import com.niduc.sensors.SensorTest;
 import com.niduc.votingalgorithms.ConsensusVoting;
@@ -12,7 +16,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.text.Normalizer;
 import java.util.ArrayList;
 
 public class Main extends Application {
@@ -23,23 +26,21 @@ public class Main extends Application {
         stage.setTitle("NiDUC projekt");
         stage.setScene(scene);
         stage.show();
+        SimulationController.setInputSignal(new InputSignal());
 
+//        SensorTest st1 = new SensorTest();
+//        st1.setErrorModel(new BiasError());
+//        SimulationController.addSensor(st1);
+//        SensorTest st2 = new SensorTest();
+//        st2.setErrorModel(new DriftError());
+//        SimulationController.addSensor(st2);
+//        SensorTest st3 = new SensorTest();
+//        st3.setErrorModel(new IntermittentDropoutError());
+//        SimulationController.addSensor(st3);
+//        SensorTest st4 = new SensorTest();
+//        st4.setErrorModel(new RandomNoiseError());
+//        SimulationController.addSensor(st4);
 
-
-        // This part of start method is used for testing purposes
-        ArrayList<Sensor> sensors = new ArrayList<>();
-        sensors.add(new SensorTest());
-        ((SensorTest)sensors.getLast()).test__setHeight(0.18230f);
-        sensors.add(new SensorTest());
-        ((SensorTest)sensors.getLast()).test__setHeight(0.18130f);
-        sensors.add(new SensorTest());
-        ((SensorTest)sensors.getLast()).test__setHeight(0.18180f);
-        sensors.add(new SensorTest());
-        ((SensorTest)sensors.getLast()).test__setHeight(0.18235f);
-        sensors.add(new SensorTest());
-        ((SensorTest)sensors.getLast()).test__setHeight(0.18155f);
-//        sensors.add(new SensorTest());
-//        ((SensorTest)sensors.getLast()).test__setHeight(0.12125f);
         ConsensusVoting cv = new ConsensusVoting();
         WeightedAveragingAlgorithm waa = new WeightedAveragingAlgorithm();
         GeneralizedMedianVoting gmv = new GeneralizedMedianVoting();

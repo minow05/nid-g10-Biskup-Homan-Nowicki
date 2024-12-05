@@ -11,6 +11,7 @@ public class SimulationController {
     private static int simulationFramerate = 100;
     private static long lastFrame = 0;
     private static boolean isRunning = false;
+    private static Float votedValue;
 
     public static final ArrayList<VotingAlgorithm> votingAlgorithms = new ArrayList<>() {{
         add(new FormalizedMajorityVoting());
@@ -18,9 +19,10 @@ public class SimulationController {
         add(new WeightedAveragingAlgorithm());
     }};
     private static VotingAlgorithm currentVotingAlgorithm;
-    private static ArrayList<Sensor> sensors;
+    private static ArrayList<Sensor> sensors = new ArrayList<>();
 
     private static MainViewController mainViewController;
+    private static InputSignal inputSignal;
 
     private final static AnimationTimer animationTimer = new AnimationTimer() {
         @Override
@@ -63,6 +65,13 @@ public class SimulationController {
      */
     private static void update() {
         SimulationController.time++;
+        SimulationController.inputSignal.updateHeight(SimulationController.time);
+        System.out.println("Sensors in time: " + SimulationController.time);
+        for (Sensor sensor : SimulationController.sensors) {
+            System.out.println(sensor.getHeight());
+        }
+        SimulationController.votedValue = SimulationController.currentVotingAlgorithm.vote(SimulationController.sensors);
+        SimulationController.mainViewController.update();
         System.out.println(SimulationController.time);
     }
 
@@ -88,5 +97,24 @@ public class SimulationController {
 
     public static void setCurrentVotingAlgorithm(VotingAlgorithm currentVotingAlgorithm) {
         SimulationController.currentVotingAlgorithm = currentVotingAlgorithm;
+    }
+
+    public static Float getVotedValue() {
+        return votedValue;
+    }
+
+    public static void setMainViewController(MainViewController mainViewController) {
+        SimulationController.mainViewController = mainViewController;
+    }
+
+    public static int getTime() {
+        return time;
+    }
+
+    public static void setInputSignal(InputSignal inputSignal) {
+        SimulationController.inputSignal = inputSignal;
+    }
+    public static InputSignal getInputSignal() {
+        return inputSignal;
     }
 }

@@ -59,6 +59,8 @@
                 <Label text="Current voting algorithm:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
                 <ComboBox fx:id="votingAlgorithmComboBox" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
                 <Text fx:id="votingAlgorithmDescription" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2" wrappingWidth="350"/>
+                <Label text="Voted value:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <Label fx:id="votedValueLabel" text="Voted value:" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
             </GridPane>
             <GridPane fx:id="votingAlgorithmParametersGridPane" xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="300" style="-fx-padding: 10;">
             </GridPane>
@@ -66,8 +68,7 @@
             <Label text="Input signal (height):" style="-fx-font-weight: bold; -fx-font-size: 20px" GridPane.rowIndex="12" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
             <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minHeight="200" minWidth="400" style="-fx-padding: 10;">
                 <Label text="Current input signal:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <Label text="Signal 1" style="-fx-font-weight: bold" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-                <Button fx:id="signalChangeButton" text="Change input signal" onAction="#changeSignal" minWidth="200" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                <Label fx:id="inputLabel" text="Signal 1" style="-fx-font-weight: bold" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
             </GridPane>
             <Separator/>
         </VBox>
