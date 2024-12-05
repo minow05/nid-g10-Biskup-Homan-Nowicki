@@ -3,12 +3,16 @@ package com.niduc;
 import com.niduc.sensors.Sensor;
 import com.niduc.sensors.SensorTest;
 import com.niduc.votingalgorithms.ConsensusVoting;
+import com.niduc.votingalgorithms.FormalizedMajorityVoting;
+import com.niduc.votingalgorithms.GeneralizedMedianVoting;
+import com.niduc.votingalgorithms.WeightedAveragingAlgorithm;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 
 public class Main extends Application {
@@ -34,10 +38,19 @@ public class Main extends Application {
         ((SensorTest)sensors.getLast()).test__setHeight(0.18235f);
         sensors.add(new SensorTest());
         ((SensorTest)sensors.getLast()).test__setHeight(0.18155f);
+//        sensors.add(new SensorTest());
+//        ((SensorTest)sensors.getLast()).test__setHeight(0.12125f);
         ConsensusVoting cv = new ConsensusVoting();
+        WeightedAveragingAlgorithm waa = new WeightedAveragingAlgorithm();
+        GeneralizedMedianVoting gmv = new GeneralizedMedianVoting();
+        FormalizedMajorityVoting fmv = new FormalizedMajorityVoting();
+        waa.setParameterValue("scalingConstant", 1.0f);
         cv.setParameterValue("allowedDifference", 0.0005f);
+        fmv.setParameterValue("closenessThreshold", 1.0f);
         System.out.println(cv.vote(sensors));
-
+        System.out.println(waa.vote(sensors));
+        System.out.println(gmv.vote(sensors));
+        System.out.println(fmv.vote(sensors));
     }
 
     public static void main(String[] args) {
