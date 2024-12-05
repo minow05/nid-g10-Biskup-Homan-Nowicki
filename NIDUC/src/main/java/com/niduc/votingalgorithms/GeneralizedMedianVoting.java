@@ -13,6 +13,9 @@ public class GeneralizedMedianVoting extends VotingAlgorithm {
     public static final String displayName = "Generalized Median Voting Algorithm";
     public static final String description = "This voting algorithm selects a median value by iteratively removing the two sensor outputs that are farthest apart until a single median value remains.";
 
+    public String getDisplayName() { return displayName; }
+    public String getDescription() { return description; }
+
     private static final ArrayList<Parameter> parameters = new ArrayList<>();
 
     @Override

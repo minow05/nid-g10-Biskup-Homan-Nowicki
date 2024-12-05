@@ -12,6 +12,9 @@ public class WeightedAveragingAlgorithm extends VotingAlgorithm {
     public static final String displayName = "Weighted Averaging Algorithm";
     public static final String description = "This algorithm calculates a weighted average of sensor outputs, with weights inversely proportional to distances between outputs.";
 
+    public String getDisplayName() { return displayName; }
+    public String getDescription() { return description; }
+
     // Default parameter values
     private float scalingConstant = 1.0f;
 

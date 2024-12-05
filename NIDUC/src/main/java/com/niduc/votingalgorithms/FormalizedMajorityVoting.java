@@ -12,6 +12,9 @@ public class FormalizedMajorityVoting extends VotingAlgorithm {
     public static final String displayName = "Formalized Majority Voting Algorithm";
     public static final String description = "This algorithm groups sensor outputs into clusters based on a closeness threshold and selects the output from the largest cluster.";
 
+    public String getDisplayName() { return displayName; }
+    public String getDescription() { return description; }
+
     private float closenessThreshold = 1.0f;
     private static final ArrayList<Parameter> parameters = new ArrayList<>(
             List.of(
