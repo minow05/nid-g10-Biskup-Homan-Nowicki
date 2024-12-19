@@ -11,6 +11,9 @@ public class RandomNoiseError extends ErrorModel {
     public static final String displayName = "Random Noise Error";
     public static final String description = "Adds random noise to the sensor reading based on 'Noise range' parameter";
 
+    public String getDisplayName() { return displayName; }
+    public String getDescription() { return description; }
+
     private float noiseRange = 5f; // Default noise range
     private static final ArrayList<Parameter> parameters = new ArrayList<>(
             List.of(
@@ -49,5 +52,10 @@ public class RandomNoiseError extends ErrorModel {
         // Generate random noise in the range [-noiseRange, noiseRange]
         float noise = (random.nextFloat() * 2 - 1) * noiseRange;
         return inputValue + noise;
+    }
+
+    @Override
+    public ErrorModel getNewInstance() {
+        return new RandomNoiseError();
     }
 }

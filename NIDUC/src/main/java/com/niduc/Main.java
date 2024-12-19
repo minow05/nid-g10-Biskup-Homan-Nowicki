@@ -41,29 +41,29 @@ public class Main extends Application {
 //        st4.setErrorModel(new RandomNoiseError());
 //        SimulationController.addSensor(st4);
 
-        ArrayList<Sensor> sensors = new ArrayList<>();
-        sensors.add(new SensorTest());
-        ((SensorTest)sensors.getLast()).test__setHeight(0.18230f);
-        sensors.add(new SensorTest());
-        ((SensorTest)sensors.getLast()).test__setHeight(0.18130f);
-        sensors.add(new SensorTest());
-        ((SensorTest)sensors.getLast()).test__setHeight(0.18180f);
-        sensors.add(new SensorTest());
-        ((SensorTest)sensors.getLast()).test__setHeight(0.18235f);
-        sensors.add(new SensorTest());
-        ((SensorTest)sensors.getLast()).test__setHeight(0.18155f);
-
-        ConsensusVoting cv = new ConsensusVoting();
-        WeightedAveragingAlgorithm waa = new WeightedAveragingAlgorithm();
-        GeneralizedMedianVoting gmv = new GeneralizedMedianVoting();
-        FormalizedMajorityVoting fmv = new FormalizedMajorityVoting();
-        waa.setParameterValue("scalingConstant", 1.0f);
-        cv.setParameterValue("allowedDifference", 0.0005f);
-        fmv.setParameterValue("closenessThreshold", 1.0f);
-        System.out.println(cv.vote(sensors));
-        System.out.println(waa.vote(sensors));
-        System.out.println(gmv.vote(sensors));
-        System.out.println(fmv.vote(sensors));
+//        ArrayList<Sensor> sensors = new ArrayList<>();
+//        sensors.add(new SensorTest());
+//        ((SensorTest)sensors.getLast()).test__setHeight(0.18230f);
+//        sensors.add(new SensorTest());
+//        ((SensorTest)sensors.getLast()).test__setHeight(0.18130f);
+//        sensors.add(new SensorTest());
+//        ((SensorTest)sensors.getLast()).test__setHeight(0.18180f);
+//        sensors.add(new SensorTest());
+//        ((SensorTest)sensors.getLast()).test__setHeight(0.18235f);
+//        sensors.add(new SensorTest());
+//        ((SensorTest)sensors.getLast()).test__setHeight(0.18155f);
+//
+//        ConsensusVoting cv = new ConsensusVoting();
+//        WeightedAveragingAlgorithm waa = new WeightedAveragingAlgorithm();
+//        GeneralizedMedianVoting gmv = new GeneralizedMedianVoting();
+//        FormalizedMajorityVoting fmv = new FormalizedMajorityVoting();
+//        waa.setParameterValue("scalingConstant", 1.0f);
+//        cv.setParameterValue("allowedDifference", 0.0005f);
+//        fmv.setParameterValue("closenessThreshold", 1.0f);
+//        System.out.println(cv.vote(sensors));
+//        System.out.println(waa.vote(sensors));
+//        System.out.println(gmv.vote(sensors));
+//        System.out.println(fmv.vote(sensors));
     }
 
     public static void main(String[] args) {

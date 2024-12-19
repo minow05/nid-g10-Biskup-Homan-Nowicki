@@ -1,6 +1,8 @@
 package com.niduc;
 
+import com.niduc.errormodels.*;
 import com.niduc.sensors.Sensor;
+import com.niduc.sensors.SensorTest;
 import com.niduc.votingalgorithms.*;
 import javafx.animation.AnimationTimer;
 
@@ -14,12 +16,25 @@ public class SimulationController {
     private static Float votedValue;
 
     public static final ArrayList<VotingAlgorithm> votingAlgorithms = new ArrayList<>() {{
+        add(new ConsensusVoting());
         add(new FormalizedMajorityVoting());
         add(new GeneralizedMedianVoting());
         add(new WeightedAveragingAlgorithm());
     }};
+    public static final ArrayList<Sensor> sensorTypes = new ArrayList<>() {{
+        add(new SensorTest());
+    }};
+    public static final ArrayList<ErrorModel> errorModels = new ArrayList<>() {{
+        add(new BiasError());
+        add(new ConstantValueError());
+        add(new DriftError());
+        add(new IntermittentDropoutError());
+        add(new OscillatingError());
+        add(new RandomNoiseError());
+    }};
+
     private static VotingAlgorithm currentVotingAlgorithm;
-    private static ArrayList<Sensor> sensors = new ArrayList<>();
+    private static final ArrayList<Sensor> sensors = new ArrayList<>();
 
     private static MainViewController mainViewController;
     private static InputSignal inputSignal;
@@ -39,7 +54,6 @@ public class SimulationController {
      */
     public static void setup() {
         SimulationController.time = 0;
-        SimulationController.sensors = new ArrayList<>();
     }
 
     /**
@@ -66,7 +80,6 @@ public class SimulationController {
     private static void update() {
         SimulationController.time++;
         SimulationController.inputSignal.updateHeight(SimulationController.time);
-        System.out.println("Sensors in time: " + SimulationController.time);
         for (Sensor sensor : SimulationController.sensors) {
             System.out.println(sensor.getHeight());
         }
@@ -89,6 +102,11 @@ public class SimulationController {
 
     public static void addSensor(Sensor sensor) {
         SimulationController.sensors.add(sensor);
+    }
+
+    public static void removeSensor(int index) {
+        if (index < 0 || index >= SimulationController.sensors.size()) return;
+        SimulationController.sensors.remove(index);
     }
 
     public static VotingAlgorithm getCurrentVotingAlgorithm() {
@@ -114,6 +132,7 @@ public class SimulationController {
     public static void setInputSignal(InputSignal inputSignal) {
         SimulationController.inputSignal = inputSignal;
     }
+
     public static InputSignal getInputSignal() {
         return inputSignal;
     }

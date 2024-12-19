@@ -10,6 +10,9 @@ public class IntermittentDropoutError extends ErrorModel {
     public static final String displayName = "Intermittent Dropout Error";
     public static final String description = "Simulates intermittent loss of sensor readings, outputting zero occasionally";
 
+    public String getDisplayName() { return displayName; }
+    public String getDescription() { return description; }
+
     private float dropoutProbability = 0.1f; // Default probability of dropout (10%)
     private static final ArrayList<Parameter> parameters = new ArrayList<>() {{
         add(new Parameter("dropoutProbability", Float.class, "Probability of sensor dropout (0.0 - 1.0)"));
@@ -48,5 +51,10 @@ public class IntermittentDropoutError extends ErrorModel {
             return 0f; // Dropout: return zero as the sensor reading
         }
         return inputValue; // No dropout: return the input value unchanged
+    }
+
+    @Override
+    public ErrorModel getNewInstance() {
+        return new IntermittentDropoutError();
     }
 }

@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Slider?>
-<?import javafx.scene.chart.ScatterChart?>
-<?import javafx.scene.chart.NumberAxis?>
+<!--<?import javafx.scene.chart.ScatterChart?>-->
+<!--<?import javafx.scene.chart.NumberAxis?>-->
 
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.text.Text?>
@@ -18,55 +16,37 @@
     <left>
         <VBox spacing="10" style="-fx-padding: 10;">
             <Label text="Simulation controls:" style="-fx-font-weight: bold; -fx-font-size: 20px"/>
-            <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minHeight="200" minWidth="400" style="-fx-padding: 10;">
-                <Label text="Simulation controls:" style="-fx-font-weight: bold; -fx-font-size: 20px" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-                <Button fx:id="runButton" text="Run" onAction="#runSimulation" GridPane.rowIndex="1" GridPane.columnIndex="0" minWidth="200"/>
-                <Button fx:id="pauseButton" text="Pause" onAction="#pauseSimulation" GridPane.rowIndex="1" GridPane.columnIndex="1" minWidth="200" disable="true"/>
-                <Slider fx:id="simulationSpeedSlider" min="1" max="200" majorTickUnit="10" minorTickCount="2" showTickLabels="true" showTickMarks="true" minWidth="410" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+            <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="400" style="-fx-padding: 10;">
+                <Button fx:id="runButton" text="Run" onAction="#runSimulation" GridPane.rowIndex="0" GridPane.columnIndex="0" minWidth="200"/>
+                <Button fx:id="pauseButton" text="Pause" onAction="#pauseSimulation" GridPane.rowIndex="0" GridPane.columnIndex="1" minWidth="200" disable="true"/>
+                <Slider fx:id="simulationSpeedSlider" min="1" max="200" majorTickUnit="10" minorTickCount="1" showTickLabels="true" showTickMarks="true" minWidth="410" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
             </GridPane>
             <Separator/>
+
             <Label text="Sensors:" style="-fx-font-weight: bold; -fx-font-size: 20px"/>
-            <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minHeight="200" minWidth="400" style="-fx-padding: 10;">
+            <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="400" style="-fx-padding: 10;">
                 <VBox spacing="10" style="-fx-padding: 10;" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2">
-                    <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="400" style="-fx-padding: 10;">
-                        <Label text="Sensor 1" style="-fx-font-weight: bold" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                        <Label text="Type T1" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-                        <Label text="Err Mod E1" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
-                        <Label text="420.69ft" style="-fx-font-weight: bold" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
-                        <Button text="Edit" GridPane.rowIndex="0" GridPane.columnIndex="4" minWidth="50"/>
-                        <Button text="Delete" style="-fx-text-fill: #770000" GridPane.rowIndex="0" GridPane.columnIndex="5" minWidth="50"/>
-
-                        <Label text="Sensor 2" style="-fx-font-weight: bold" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                        <Label text="Type T2" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-                        <Label text="Err Mod E2" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
-                        <Label text="37.21ft" style="-fx-font-weight: bold" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
-                        <Button text="Edit" GridPane.rowIndex="1" GridPane.columnIndex="4" minWidth="50"/>
-                        <Button text="Delete" style="-fx-text-fill: #770000" GridPane.rowIndex="1" GridPane.columnIndex="5" minWidth="50"/>
-
-                        <Label text="Sensor 3" style="-fx-font-weight: bold" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                        <Label text="Type T3" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-                        <Label text="Err Mod E3" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
-                        <Label text="15.51ft" style="-fx-font-weight: bold" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
-                        <Button text="Edit" GridPane.rowIndex="2" GridPane.columnIndex="4" minWidth="50"/>
-                        <Button text="Delete" style="-fx-text-fill: #770000" GridPane.rowIndex="2" GridPane.columnIndex="5" minWidth="50"/>
-                    </GridPane>
+                    <GridPane fx:id="sensorsGridPane" xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="400" style="-fx-padding: 10;"> </GridPane>
                 </VBox>
-                <Button fx:id="sensorAddButton" text="Add sensor" onAction="#addSensor" minWidth="200" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                <ComboBox fx:id="sensorTypeComboBox" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Button fx:id="sensorAddButton" text="Add sensor" onAction="#addSensor" minWidth="200" GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
+                <Text fx:id="sensorTypeDescription" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2" wrappingWidth="350"/>
             </GridPane>
             <Separator/>
+
             <Label text="Voting algorithm:" style="-fx-font-weight: bold; -fx-font-size: 20px"/>
             <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="400" style="-fx-padding: 10;">
                 <Label text="Current voting algorithm:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
                 <ComboBox fx:id="votingAlgorithmComboBox" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
                 <Text fx:id="votingAlgorithmDescription" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2" wrappingWidth="350"/>
                 <Label text="Voted value:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <Label fx:id="votedValueLabel" text="Voted value:" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <Label fx:id="votedValueLabel" text="0.0ft" style="-fx-font-weight: bold" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
             </GridPane>
-            <GridPane fx:id="votingAlgorithmParametersGridPane" xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="300" style="-fx-padding: 10;">
-            </GridPane>
+            <GridPane fx:id="votingAlgorithmParametersGridPane" xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="300" style="-fx-padding: 10;"> </GridPane>
             <Separator/>
+
             <Label text="Input signal (height):" style="-fx-font-weight: bold; -fx-font-size: 20px" GridPane.rowIndex="12" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-            <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minHeight="200" minWidth="400" style="-fx-padding: 10;">
+            <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="400" style="-fx-padding: 10;">
                 <Label text="Current input signal:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
                 <Label fx:id="inputLabel" text="Signal 1" style="-fx-font-weight: bold" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
             </GridPane>
@@ -74,6 +54,28 @@
         </VBox>
     </left>
     <center>
+        <VBox fx:id="sensorEditVBox" spacing="10" style="-fx-padding: 10;">
+            <Label text="Sensor settings:" style="-fx-font-weight: bold; -fx-font-size: 20px"/>
+            <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="400" style="-fx-padding: 10;">
+                <Label text="Sensor name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <Label fx:id="editedSensorNameLabel" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label text="Sensor type:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Label fx:id="editedSensorTypeLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Text fx:id="editedSensorDescription" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2" wrappingWidth="350"/>
+            </GridPane>
+            <GridPane fx:id="sensorParametersGridPane" xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="300" style="-fx-padding: 10;"> </GridPane>
+            <Separator/>
+            <Label text="Applied error models:" style="-fx-font-weight: bold; -fx-font-size: 20px"/>
+            <VBox fx:id="sensorEditAppliedErrorModelsVBox" spacing="10" style="-fx-padding: 10;">
+            </VBox>
+            <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="400" style="-fx-padding: 10;">
+                <ComboBox fx:id="errorModelComboBox" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Button fx:id="errorAddButton" text="Add error" minWidth="200" GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
+                <Text fx:id="errorModelDescription" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2" wrappingWidth="350"/>
+            </GridPane>
+            <Separator/>
+            <Button fx:id="closeSensorEditButton" text="Close" onAction="#closeSensorEdit" minWidth="200" GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
+        </VBox>
     </center>
     <right>
         <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minHeight="200" minWidth="400" style="-fx-padding: 10;">

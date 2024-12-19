@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public abstract class ErrorModel {
-    public static final String displayName = "Some idiot didn't override it in subclass";
-    public static final String description = "Some idiot didn't override it in subclass";
+    public abstract String getDisplayName();
+    public abstract String getDescription();
 
     /**
      * Return list of assignable parameters for this Error Model
@@ -42,4 +42,8 @@ public abstract class ErrorModel {
      * @return value with error
      */
     public abstract float getErrorValue(float inputValue);
+
+    public abstract ErrorModel getNewInstance();
+
+    public String toString() { return this.getDisplayName(); }
 }

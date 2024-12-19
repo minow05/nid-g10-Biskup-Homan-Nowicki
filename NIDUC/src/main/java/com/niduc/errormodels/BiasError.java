@@ -9,6 +9,9 @@ public class BiasError extends ErrorModel {
     public static final String displayName = "Bias Error";
     public static final String description = "Simulates a constant offset in the sensor reading";
 
+    public String getDisplayName() { return displayName; }
+    public String getDescription() { return description; }
+
     private float biasValue = 10f; // Default bias value
     private static final ArrayList<Parameter> parameters = new ArrayList<>() {{
         add(new Parameter("biasValue", Float.class, "Constant offset added to the sensor reading"));
@@ -42,5 +45,10 @@ public class BiasError extends ErrorModel {
     public float getErrorValue(float inputValue) {
         // Apply the bias to the input value
         return inputValue + biasValue;
+    }
+
+    @Override
+    public ErrorModel getNewInstance() {
+        return new BiasError();
     }
 }

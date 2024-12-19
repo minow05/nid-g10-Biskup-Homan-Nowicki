@@ -10,6 +10,9 @@ public class DriftError extends ErrorModel {
     public static final String displayName = "Sensor Drift Error";
     public static final String description = "Simulates a gradual drift in the sensor reading over time";
 
+    public String getDisplayName() { return displayName; }
+    public String getDescription() { return description; }
+
     private float driftRate = 0.1f; // Default drift rate (meters per second)
     private float maxDrift = 10f;   // Maximum drift allowed
     private float accumulatedDrift = 0f; // Tracks the current drift
@@ -57,5 +60,10 @@ public class DriftError extends ErrorModel {
         accumulatedDrift = Math.min(accumulatedDrift + driftRate, maxDrift);
         // Apply the drift to the input value
         return inputValue + accumulatedDrift;
+    }
+
+    @Override
+    public ErrorModel getNewInstance() {
+        return new DriftError();
     }
 }

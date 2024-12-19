@@ -10,6 +10,9 @@ public class OscillatingError extends ErrorModel {
     public static final String displayName = "Oscillating Error";
     public static final String description = "Simulates periodic fluctuations in the sensor reading";
 
+    public String getDisplayName() { return displayName; }
+    public String getDescription() { return description; }
+
     private float amplitude = 5f; // Default oscillation amplitude
     private float frequency = 1f; // Default oscillation frequency (cycles per second)
     private static final ArrayList<Parameter> parameters = new ArrayList<>() {{
@@ -59,5 +62,10 @@ public class OscillatingError extends ErrorModel {
 
         // Add the oscillation to the input value
         return inputValue + oscillation;
+    }
+
+    @Override
+    public ErrorModel getNewInstance() {
+        return new OscillatingError();
     }
 }
