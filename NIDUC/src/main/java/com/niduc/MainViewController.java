@@ -2,6 +2,7 @@ package com.niduc;
 
 import com.niduc.errormodels.ErrorModel;
 import com.niduc.sensors.Sensor;
+import com.niduc.sensors.SensorTest;
 import com.niduc.votingalgorithms.VotingAlgorithm;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class MainViewController {
@@ -65,6 +67,7 @@ public class MainViewController {
         simulationSpeedSlider.valueProperty().addListener((observable, oldValue, newValue) -> SimulationController.setSimulationFramerate(newValue.intValue()));
         this.initializeVotingAlgorithmComboBox();
         this.initializeSensorTypeComboBox();
+//        this.initializeErrorModelComboBox(new SensorTest());
         this.initializeErrorModelComboBox();
         this.updateSensors();
         this.closeSensorEdit(null);
@@ -105,7 +108,12 @@ public class MainViewController {
     }
 
     private void initializeErrorModelComboBox() {
+//        args: Sensor sensor
         errorModelComboBox.getItems().addAll(SimulationController.errorModels);
+//        for (ErrorModel errorModel : SimulationController.errorModels){
+//            if (sensor.getAllowedErrors().contains(errorModel));
+//            errorModelComboBox.getItems().add(errorModel);
+//        }
         errorModelComboBox.setOnAction(event -> {
             ErrorModel selectedError = this.errorModelComboBox.getValue();
             this.errorModelDescription.setText(selectedError == null ? "" : selectedError.getDescription());
@@ -173,6 +181,7 @@ public class MainViewController {
             this.sensorParametersGridPane.add(new Label(parameter.getType().getSimpleName()), 2, i);
         }
         this.errorAddButton.setOnAction(event -> {
+//            initializeErrorModelComboBox(selectedSensor);
             ErrorModel selectedError = this.errorModelComboBox.getValue();
             if (selectedError == null) return;
             selectedSensor.addError(selectedError.getNewInstance());

@@ -19,6 +19,11 @@ public class RadarSensor extends Sensor {
             )
     );
 
+    @Override
+    public List<Class<? extends ErrorModel>> getAllowedErrors() {
+        return allowedErrors;
+    }
+
     private final List<Class<? extends ErrorModel>> allowedErrors = List.of(
             RandomNoiseError.class,
             OscillatingError.class,

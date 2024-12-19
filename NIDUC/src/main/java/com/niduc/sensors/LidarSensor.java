@@ -22,7 +22,12 @@ public class LidarSensor extends Sensor {
             )
     );
 
-    private final List<Class<? extends ErrorModel>> allowedErrors = List.of(
+    @Override
+    public List<Class<? extends ErrorModel>> getAllowedErrors() {
+        return allowedErrors;
+    }
+
+    public List<Class<? extends ErrorModel>> allowedErrors = List.of(
             RandomNoiseError.class,
             OscillatingError.class,
             IntermittentDropoutError.class
