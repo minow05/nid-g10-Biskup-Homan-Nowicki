@@ -1,8 +1,7 @@
 package com.niduc;
 
 import com.niduc.errormodels.*;
-import com.niduc.sensors.Sensor;
-import com.niduc.sensors.SensorTest;
+import com.niduc.sensors.*;
 import com.niduc.votingalgorithms.*;
 import javafx.animation.AnimationTimer;
 
@@ -23,6 +22,9 @@ public class SimulationController {
     }};
     public static final ArrayList<Sensor> sensorTypes = new ArrayList<>() {{
         add(new SensorTest());
+        add(new BarometricSensor());
+        add(new LidarSensor());
+        add(new RadarSensor());
     }};
     public static final ArrayList<ErrorModel> errorModels = new ArrayList<>() {{
         add(new BiasError());
