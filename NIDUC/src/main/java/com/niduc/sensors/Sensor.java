@@ -4,6 +4,7 @@ import com.niduc.Parameter;
 import com.niduc.errormodels.ErrorModel;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public abstract class Sensor {
@@ -83,6 +84,8 @@ public abstract class Sensor {
             result = error.getErrorValue(result);
         return result;
     }
+
+    public abstract List<Class<? extends ErrorModel>> getAllowedErrors();
 
     public String toString() { return this.getDisplayName(); }
 }

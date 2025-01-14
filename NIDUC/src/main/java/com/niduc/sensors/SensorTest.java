@@ -2,6 +2,7 @@ package com.niduc.sensors;
 
 import com.niduc.Parameter;
 import com.niduc.SimulationController;
+import com.niduc.errormodels.ErrorModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,11 @@ public class SensorTest extends Sensor {
                 System.err.println("Invalid value for parameter 'testParam'.");
             }
         }
+    }
+
+    @Override
+    public List<Class<? extends ErrorModel>> getAllowedErrors() {
+        return List.of();
     }
 
     @Override
