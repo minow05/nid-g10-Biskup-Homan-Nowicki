@@ -11,6 +11,14 @@ import java.util.Map;
 public class BarometricSensor extends Sensor {
     public static final String displayName = "Barometric Sensor";
     public static final String description = "Barometric sensor for measuring atmospheric pressure.";
+    public static final ArrayList<ErrorModel> allowedErrors = new ArrayList<>() {{
+        add(new BiasError());
+        add(new ConstantValueError());
+        add(new DriftError());
+        add(new IntermittentDropoutError());
+        add(new OscillatingError());
+        add(new RandomNoiseError());
+    }};
 
     private float barometricSensitivity;
     private static final ArrayList<Parameter> parameters = new ArrayList<>(
@@ -20,16 +28,9 @@ public class BarometricSensor extends Sensor {
     );
 
     @Override
-    public List<Class<? extends ErrorModel>> getAllowedErrors() {
+    public ArrayList<ErrorModel> getAllowedErrors() {
         return allowedErrors;
     }
-
-    private final List<Class<? extends ErrorModel>> allowedErrors = List.of(
-            DriftError.class,
-            ConstantValueError.class,
-            IntermittentDropoutError.class,
-            BiasError.class
-    );
 
     @Override
     public String getDisplayName() {
@@ -72,11 +73,11 @@ public class BarometricSensor extends Sensor {
         return this.calculateAppliedErrors(SimulationController.getInputSignal().getHeight());
     }
 
-    @Override
-    public void addError(ErrorModel error) {
-        if (!allowedErrors.contains(error.getClass())) {
-            throw new IllegalArgumentException("This error model is not allowed for Barometric Sensor.");
-        }
-        super.addError(error);
-    }
+//    @Override
+//    public void addError(ErrorModel error) {
+//        if (!allowedErrors.contains(error.getClass())) {
+//            throw new IllegalArgumentException("This error model is not allowed for Barometric Sensor.");
+//        }
+//        super.addError(error);
+//    }
 }

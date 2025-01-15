@@ -2,10 +2,7 @@ package com.niduc.sensors;
 
 import com.niduc.Parameter;
 import com.niduc.SimulationController;
-import com.niduc.errormodels.ErrorModel;
-import com.niduc.errormodels.IntermittentDropoutError;
-import com.niduc.errormodels.OscillatingError;
-import com.niduc.errormodels.RandomNoiseError;
+import com.niduc.errormodels.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +11,11 @@ import java.util.Map;
 public class LidarSensor extends Sensor {
     public static final String displayName = "LIDAR Sensor";
     public static final String description = "LIDAR sensor for measuring distance using laser.";
+    public static final ArrayList<ErrorModel> allowedErrors = new ArrayList<>() {{
+        add(new BiasError());
+        add(new ConstantValueError());
+        add(new DriftError());
+    }};
 
     private float lidarRange;
     private static final ArrayList<Parameter> parameters = new ArrayList<>(
@@ -22,16 +24,11 @@ public class LidarSensor extends Sensor {
             )
     );
 
+
     @Override
-    public List<Class<? extends ErrorModel>> getAllowedErrors() {
+    public ArrayList<ErrorModel> getAllowedErrors() {
         return allowedErrors;
     }
-
-    public List<Class<? extends ErrorModel>> allowedErrors = List.of(
-            RandomNoiseError.class,
-            OscillatingError.class,
-            IntermittentDropoutError.class
-    );
 
     @Override
     public String getDisplayName() {
@@ -74,11 +71,11 @@ public class LidarSensor extends Sensor {
         return this.calculateAppliedErrors(SimulationController.getInputSignal().getHeight());
     }
 
-    @Override
-    public void addError(ErrorModel error) {
-        if (!allowedErrors.contains(error.getClass())) {
-            throw new IllegalArgumentException("This error model is not allowed for LIDAR Sensor.");
-        }
-        super.addError(error);
-    }
+//    @Override
+//    public void addError(ErrorModel error) {
+//        if (!allowedErrors.contains(error.getClass())) {
+//            throw new IllegalArgumentException("This error model is not allowed for LIDAR Sensor.");
+//        }
+//        super.addError(error);
+//    }
 }

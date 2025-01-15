@@ -2,7 +2,7 @@ package com.niduc.sensors;
 
 import com.niduc.Parameter;
 import com.niduc.SimulationController;
-import com.niduc.errormodels.ErrorModel;
+import com.niduc.errormodels.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +31,12 @@ public class SensorTest extends Sensor {
     }
 
     @Override
+    public ArrayList<ErrorModel> getAllowedErrors() {
+        return SimulationController.errorModels;
+    }
+
+
+    @Override
     public Map<String, Object> getParameterValues() {
         return Map.of(
                 "testParam", this.test__param
@@ -49,11 +55,6 @@ public class SensorTest extends Sensor {
     }
 
     @Override
-    public List<Class<? extends ErrorModel>> getAllowedErrors() {
-        return List.of();
-    }
-
-    @Override
     public Sensor getNewInstance() {
         return new SensorTest();
     }
@@ -61,7 +62,6 @@ public class SensorTest extends Sensor {
     @Override
     public float getHeight() {
         return this.calculateAppliedErrors(SimulationController.getInputSignal().getHeight());
-//        return test__height;
     }
     public void test__setHeight(float height) {
         this.test__height = height;
