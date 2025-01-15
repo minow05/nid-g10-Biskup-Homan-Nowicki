@@ -15,7 +15,7 @@
 <?import javafx.scene.chart.LineChart?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.niduc.MainViewController">
     <left>
-        <VBox spacing="10" style="-fx-padding: 10;">
+        <VBox spacing="10" style="-fx-padding: 10;" maxWidth="500">
             <Label text="Simulation controls:" style="-fx-font-weight: bold; -fx-font-size: 20px"/>
             <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="400" style="-fx-padding: 10;">
                 <Button fx:id="runButton" text="Run" onAction="#runSimulation" GridPane.rowIndex="0" GridPane.columnIndex="0" minWidth="200"/>
@@ -57,7 +57,7 @@
         </VBox>
     </left>
     <center>
-        <VBox fx:id="sensorEditVBox" spacing="10" style="-fx-padding: 10;">
+        <VBox fx:id="sensorEditVBox" spacing="10" style="-fx-padding: 10;" maxWidth="500">
             <Label text="Sensor settings:" style="-fx-font-weight: bold; -fx-font-size: 20px"/>
             <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="400" style="-fx-padding: 10;">
                 <Label text="Sensor name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
@@ -82,28 +82,28 @@
     </center>
     <right>
         <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minHeight="200" minWidth="400" style="-fx-padding: 10;">
-            <LineChart fx:id="votedChart" layoutX="14.0" layoutY="14.0" maxHeight="300.0" maxWidth="300.0" GridPane.rowIndex="1" animated="false" createSymbols="false" style="-fx-stroke-width: 1px;">
+            <LineChart fx:id="votedChart" layoutX="14.0" layoutY="14.0" minHeight="500.0" minWidth="800.0" GridPane.rowIndex="1" animated="false" createSymbols="false" style="-fx-stroke-width: 1px;">
                 <xAxis>
-                    <NumberAxis label="Time [s]" upperBound="3100" tickUnit="120" autoRanging="false" animated="false"/>
+                    <NumberAxis label="Time [s]" animated="false"/>
                 </xAxis>
                 <yAxis>
-                    <NumberAxis label="Height [ft]" upperBound="40000" tickUnit="2000" autoRanging="false" animated="false"/>
+                    <NumberAxis label="Height [ft]" animated="false"/>
                 </yAxis>
             </LineChart>
-            <LineChart fx:id="sensorsChart" layoutX="14.0" layoutY="14.0" maxHeight="300.0" maxWidth="300.0" GridPane.rowIndex="2" animated="false" createSymbols="false" style="-fx-stroke-width: 1px;">
+            <LineChart fx:id="sensorsChart" layoutX="14.0" layoutY="14.0" minHeight="500.0" minWidth="800.0" GridPane.rowIndex="2" animated="false" createSymbols="false" style="-fx-stroke-width: 1px;">
                 <xAxis>
-                    <NumberAxis label="Time [s]" upperBound="3100" tickUnit="120" autoRanging="false" animated="false"/>
+                    <NumberAxis label="Time [s]" animated="false"/>
                 </xAxis>
                 <yAxis>
-                    <NumberAxis label="Height [ft]" upperBound="40000" tickUnit="2000" autoRanging="false" animated="false"/>
+                    <NumberAxis label="Height [ft]" animated="false"/>
                 </yAxis>
             </LineChart>
 <!--            <ScatterChart fx:id="testChart" layoutX="14.0" layoutY="14.0" maxHeight="300.0" maxWidth="300.0" GridPane.rowIndex="3" animated="false" createSymbols="false" style="-fx-stroke-width: 1px;">-->
 <!--                <xAxis>-->
-<!--                    <NumberAxis label="Time [s]" upperBound="3100" tickUnit="120" autoRanging="false" animated="false"/>-->
+<!--                    <NumberAxis label="Time [s]" animated="false"/>-->
 <!--                </xAxis>-->
 <!--                <yAxis>-->
-<!--                    <NumberAxis label="Height [ft]" upperBound="40000" tickUnit="2000" autoRanging="false" animated="false"/>-->
+<!--                    <NumberAxis label="Height [ft]" animated="false"/>-->
 <!--                </yAxis>-->
 <!--            </ScatterChart>-->
         </GridPane>

@@ -49,7 +49,8 @@ public class MainViewController {
     @FXML public Label simulationCurrentSpeed;
     @FXML public LineChart<Integer, Float> votedChart;
     @FXML public LineChart<Integer, Float> sensorsChart;
-    private XYChart.Series<Integer, Float> heightSeries;
+    private XYChart.Series<Integer, Float> heightSeries1;
+    private XYChart.Series<Integer, Float> heightSeries2;
     private XYChart.Series<Integer, Float> votedHeightSeries;
     private ArrayList<XYChart.Series<Integer, Float>> sensorsSeries = new ArrayList<>();
     private ArrayList<Parameter> votingAlgorithmParameters;
@@ -324,13 +325,15 @@ public class MainViewController {
     public void initializeGraphs() {
         this.votedChart.getData().clear();
         this.sensorsChart.getData().clear();
-        this.heightSeries = new XYChart.Series<>();
-        this.heightSeries.setName("Height");
+        this.heightSeries1 = new XYChart.Series<>();
+        this.heightSeries1.setName("Height");
+        this.heightSeries2 = new XYChart.Series<>();
+        this.heightSeries2.setName("Height");
         this.votedHeightSeries = new XYChart.Series<>();
         this.votedHeightSeries.setName("Voted Height");
-        this.votedChart.getData().add(heightSeries);
+        this.votedChart.getData().add(heightSeries1);
         this.votedChart.getData().add(votedHeightSeries);
-        this.sensorsChart.getData().add(heightSeries);
+        this.sensorsChart.getData().add(heightSeries2);
 
         this.sensorsSeries.clear();
         for (int i = 0; i < SimulationController.getSensors().size(); i++) {
@@ -339,12 +342,14 @@ public class MainViewController {
             this.sensorsSeries.add(sensorSeries);
             this.sensorsChart.getData().add(sensorSeries);
         }
+//        updateGraphs();
     }
 
     public void updateGraphs() {
         ArrayList<Sensor> sensorsList = SimulationController.getSensors();
         Integer currentTime = SimulationController.getTime();
-        this.heightSeries.getData().add(new XYChart.Data<>(currentTime, SimulationController.getInputSignal().getHeight()));
+        this.heightSeries1.getData().add(new XYChart.Data<>(currentTime, SimulationController.getInputSignal().getHeight()));
+        this.heightSeries2.getData().add(new XYChart.Data<>(currentTime, SimulationController.getInputSignal().getHeight()));
         this.votedHeightSeries.getData().add(new XYChart.Data<>(currentTime, SimulationController.getVotedValue()));
         for (int i = 0; i < sensorsList.size(); i++)
             this.sensorsSeries.get(i).getData().add(new XYChart.Data<>(currentTime, sensorsList.get(i).getHeight()));
