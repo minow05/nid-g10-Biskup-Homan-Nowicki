@@ -1,6 +1,5 @@
 package com.niduc;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Parameter {
@@ -32,6 +31,27 @@ public class Parameter {
                 return parameter;
             }
         }
+        return null;
+    }
+
+    public Object validateValue(String value) {
+        if (value == null) {
+            return null;
+        }
+        if (this.type == String.class) {
+            return value;
+        }
+        if (this.type == Boolean.class) {
+            return Boolean.parseBoolean(value);
+        }
+        try {
+            if (this.type == Integer.class) {
+                return Integer.parseInt(value);
+            }
+            if (this.type == Float.class) {
+                return Float.parseFloat(value);
+            }
+        } catch (NumberFormatException ignored) {}
         return null;
     }
 }
