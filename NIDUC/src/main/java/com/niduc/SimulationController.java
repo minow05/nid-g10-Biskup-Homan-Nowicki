@@ -16,12 +16,10 @@ public class SimulationController {
 
     public static final ArrayList<VotingAlgorithm> votingAlgorithms = new ArrayList<>() {{
         add(new ConsensusVoting());
-        add(new FormalizedMajorityVoting());
         add(new GeneralizedMedianVoting());
         add(new WeightedAveragingAlgorithm());
     }};
     public static final ArrayList<Sensor> sensorTypes = new ArrayList<>() {{
-        add(new SensorTest());
         add(new BarometricSensor());
         add(new LidarSensor());
         add(new RadarSensor());
@@ -82,12 +80,8 @@ public class SimulationController {
     private static void update() {
         SimulationController.time++;
         SimulationController.inputSignal.updateHeight(SimulationController.time);
-        for (Sensor sensor : SimulationController.sensors) {
-            System.out.println(sensor.getHeight());
-        }
         SimulationController.votedValue = SimulationController.currentVotingAlgorithm.vote(SimulationController.sensors);
         SimulationController.mainViewController.update();
-        System.out.println(SimulationController.time);
     }
 
     public static int getSimulationFramerate() {
@@ -137,5 +131,13 @@ public class SimulationController {
 
     public static InputSignal getInputSignal() {
         return inputSignal;
+    }
+
+    public static ArrayList<Float> getSensorsOutputs() {
+        ArrayList<Float> sensorsOutputs = new ArrayList<>();
+        for (Sensor sensor : SimulationController.sensors) {
+            sensorsOutputs.add(sensor.getHeight());
+        }
+        return sensorsOutputs;
     }
 }

@@ -38,7 +38,9 @@ public class GeneralizedMedianVoting extends VotingAlgorithm {
     public float vote(ArrayList<Sensor> sensors) {
         ArrayList<Float> sensorOutputs = new ArrayList<>();
         for (Sensor sensor : sensors) {
-            sensorOutputs.add(sensor.getHeight());
+            Float height = sensor.getHeight();
+            if (height != null)
+                sensorOutputs.add(height);
         }
 
         // Continue until one value remains

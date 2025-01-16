@@ -7,19 +7,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Slider?>
-<!--<?import javafx.scene.chart.ScatterChart?>-->
-<!--<?import javafx.scene.chart.NumberAxis?>-->
+<?import javafx.scene.chart.ScatterChart?>
+<?import javafx.scene.chart.NumberAxis?>
 
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.control.CheckBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.niduc.MainViewController">
     <left>
-        <VBox spacing="10" style="-fx-padding: 10;">
+        <VBox spacing="10" style="-fx-padding: 10;" maxWidth="500">
             <Label text="Simulation controls:" style="-fx-font-weight: bold; -fx-font-size: 20px"/>
             <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="400" style="-fx-padding: 10;">
                 <Button fx:id="runButton" text="Run" onAction="#runSimulation" GridPane.rowIndex="0" GridPane.columnIndex="0" minWidth="200"/>
                 <Button fx:id="pauseButton" text="Pause" onAction="#pauseSimulation" GridPane.rowIndex="0" GridPane.columnIndex="1" minWidth="200" disable="true"/>
                 <Slider fx:id="simulationSpeedSlider" min="1" max="200" majorTickUnit="10" minorTickCount="1" showTickLabels="true" showTickMarks="true" minWidth="410" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                <Label text="Simulation speed (simulation seconds / s)" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <Label fx:id="simulationCurrentSpeed" text="100" style="-fx-font-weight: bold" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
             </GridPane>
             <Separator/>
 
@@ -47,14 +51,16 @@
 
             <Label text="Input signal (height):" style="-fx-font-weight: bold; -fx-font-size: 20px" GridPane.rowIndex="12" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
             <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="400" style="-fx-padding: 10;">
-                <Label text="Current input signal:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <Label fx:id="inputLabel" text="Signal 1" style="-fx-font-weight: bold" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label text="Current input height:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <Label fx:id="inputLabel" text="0 ft" style="-fx-font-weight: bold" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label text="Is high altitude test:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <CheckBox fx:id="highAltitudeTestCheckBox" selected="true" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
             </GridPane>
             <Separator/>
         </VBox>
     </left>
     <center>
-        <VBox fx:id="sensorEditVBox" spacing="10" style="-fx-padding: 10;">
+        <VBox fx:id="sensorEditVBox" spacing="10" style="-fx-padding: 10;" maxWidth="500">
             <Label text="Sensor settings:" style="-fx-font-weight: bold; -fx-font-size: 20px"/>
             <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="400" style="-fx-padding: 10;">
                 <Label text="Sensor name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
@@ -79,6 +85,30 @@
     </center>
     <right>
         <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minHeight="200" minWidth="400" style="-fx-padding: 10;">
+            <LineChart fx:id="votedChart" layoutX="14.0" layoutY="14.0" minHeight="500.0" minWidth="800.0" GridPane.rowIndex="1" animated="false" createSymbols="false" style="-fx-stroke-width: 1px;">
+                <xAxis>
+                    <NumberAxis label="Time [s]" animated="false"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Height [ft]" animated="false"/>
+                </yAxis>
+            </LineChart>
+            <LineChart fx:id="sensorsChart" layoutX="14.0" layoutY="14.0" minHeight="500.0" minWidth="800.0" GridPane.rowIndex="2" animated="false" createSymbols="false" style="-fx-stroke-width: 1px;">
+                <xAxis>
+                    <NumberAxis label="Time [s]" animated="false"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Height [ft]" animated="false"/>
+                </yAxis>
+            </LineChart>
+<!--            <ScatterChart fx:id="testChart" layoutX="14.0" layoutY="14.0" maxHeight="300.0" maxWidth="300.0" GridPane.rowIndex="3" animated="false" createSymbols="false" style="-fx-stroke-width: 1px;">-->
+<!--                <xAxis>-->
+<!--                    <NumberAxis label="Time [s]" animated="false"/>-->
+<!--                </xAxis>-->
+<!--                <yAxis>-->
+<!--                    <NumberAxis label="Height [ft]" animated="false"/>-->
+<!--                </yAxis>-->
+<!--            </ScatterChart>-->
         </GridPane>
     </right>
 </BorderPane>

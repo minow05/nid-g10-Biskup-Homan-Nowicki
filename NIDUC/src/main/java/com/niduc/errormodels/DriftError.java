@@ -17,8 +17,8 @@ public class DriftError extends ErrorModel {
     private float maxDrift = 10f;   // Maximum drift allowed
     private float accumulatedDrift = 0f; // Tracks the current drift
     private static final ArrayList<Parameter> parameters = new ArrayList<>() {{
-        add(new Parameter("driftRate", Float.class, "Rate of drift (meters per second)"));
-        add(new Parameter("maxDrift", Float.class, "Maximum allowed drift (meters)"));
+        add(new Parameter("driftRate", Float.class, "Rate of drift (feet per second)"));
+        add(new Parameter("maxDrift", Float.class, "Maximum allowed drift (feet)"));
     }};
 
 

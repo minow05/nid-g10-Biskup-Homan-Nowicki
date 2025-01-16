@@ -58,7 +58,9 @@ public class WeightedAveragingAlgorithm extends VotingAlgorithm {
         int n = sensors.size();
         ArrayList<Float> sensorOutputs = new ArrayList<>();
         for (Sensor sensor : sensors) {
-            sensorOutputs.add(sensor.getHeight());
+            Float height = sensor.getHeight();
+            if (height != null)
+                sensorOutputs.add(height);
         }
 
         float[] weights = new float[n];

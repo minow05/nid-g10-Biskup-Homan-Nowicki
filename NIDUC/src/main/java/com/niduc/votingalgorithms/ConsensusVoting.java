@@ -54,7 +54,9 @@ public class ConsensusVoting extends VotingAlgorithm {
         ArrayList<Float> currentSensorOutputsPartition = new ArrayList<>();
         ArrayList<Float> largestSensorOutputsPartition = new ArrayList<>();
         for (Sensor sensor : sensors) {
-            sensorOutputs.add(sensor.getHeight());
+            Float height = sensor.getHeight();
+            if (height != null)
+                sensorOutputs.add(height);
         }
         while (!sensorOutputs.isEmpty()) {
             currentSensorOutputsPartition.add(sensorOutputs.getFirst());
