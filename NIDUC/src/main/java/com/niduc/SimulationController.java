@@ -16,12 +16,10 @@ public class SimulationController {
 
     public static final ArrayList<VotingAlgorithm> votingAlgorithms = new ArrayList<>() {{
         add(new ConsensusVoting());
-        add(new FormalizedMajorityVoting());
         add(new GeneralizedMedianVoting());
         add(new WeightedAveragingAlgorithm());
     }};
     public static final ArrayList<Sensor> sensorTypes = new ArrayList<>() {{
-        add(new SensorTest());
         add(new BarometricSensor());
         add(new LidarSensor());
         add(new RadarSensor());

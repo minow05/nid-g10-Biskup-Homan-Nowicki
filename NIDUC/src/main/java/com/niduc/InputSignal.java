@@ -1,8 +1,15 @@
 package com.niduc;
 
 public class InputSignal {
-    float height;
+    private float height;
+    private boolean isHighAltitudeTest = true;
     public void updateHeight(int time){
+        if (isHighAltitudeTest)
+            highAltitudeInput(time);
+        else
+            lowAltitudeInput(time);
+    }
+    public void highAltitudeInput(int time) {
         if (time >= 0 && time < 800)
             this.height = 45 * time;
         else if (time >= 800 && time < 1000)
@@ -14,7 +21,23 @@ public class InputSignal {
         else
             this.height = 0;
     }
+    public void lowAltitudeInput(int time) {
+        if (time >= 0 && time < 200)
+            this.height = 12.5f * time;
+        else if (time >= 200 && time < 500)
+            this.height = 2500;
+        else if (time >= 500 && time < 700)
+            this.height = 81000 - 45 * time;
+        else
+            this.height = 0;
+    }
     public float getHeight() {
         return height;
+    }
+    public boolean isHighAltitudeTest() {
+        return isHighAltitudeTest;
+    }
+    public void setIsHighAltitudeTest(boolean isHighAltitudeTest) {
+        this.isHighAltitudeTest = isHighAltitudeTest;
     }
 }

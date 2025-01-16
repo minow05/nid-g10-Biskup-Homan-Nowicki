@@ -60,7 +60,7 @@ public class SensorTest extends Sensor {
     }
 
     @Override
-    public float getHeight() {
+    public Float getHeight() {
         return this.calculateAppliedErrors(SimulationController.getInputSignal().getHeight());
     }
     public void test__setHeight(float height) {

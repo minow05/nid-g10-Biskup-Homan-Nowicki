@@ -13,6 +13,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.control.CheckBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.niduc.MainViewController">
     <left>
         <VBox spacing="10" style="-fx-padding: 10;" maxWidth="500">
@@ -50,8 +51,10 @@
 
             <Label text="Input signal (height):" style="-fx-font-weight: bold; -fx-font-size: 20px" GridPane.rowIndex="12" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
             <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" minWidth="400" style="-fx-padding: 10;">
-                <Label text="Current input signal:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <Label fx:id="inputLabel" text="Signal 1" style="-fx-font-weight: bold" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label text="Current input height:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <Label fx:id="inputLabel" text="0 ft" style="-fx-font-weight: bold" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label text="Is high altitude test:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <CheckBox fx:id="highAltitudeTestCheckBox" selected="true" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
             </GridPane>
             <Separator/>
         </VBox>

@@ -15,14 +15,12 @@ public class LidarSensor extends Sensor {
         add(new BiasError());
         add(new ConstantValueError());
         add(new DriftError());
+        add(new IntermittentDropoutError());
+        add(new OscillatingError());
+        add(new RandomNoiseError());
     }};
 
-    private float lidarRange;
-    private static final ArrayList<Parameter> parameters = new ArrayList<>(
-            List.of(
-                    new Parameter("lidarRange", Float.class, "Range of the LIDAR sensor")
-            )
-    );
+    private static final ArrayList<Parameter> parameters = new ArrayList<>();
 
 
     @Override
@@ -42,23 +40,16 @@ public class LidarSensor extends Sensor {
 
     @Override
     public ArrayList<Parameter> getParameters() {
-        return new ArrayList<>(parameters);
+        return new ArrayList<>();
     }
 
     @Override
     public Map<String, Object> getParameterValues() {
-        return Map.of("lidarRange", lidarRange);
+        return Map.of();
     }
 
     @Override
     public void setParameterValues(Map<String, Object> parameters) {
-        if (parameters.containsKey("lidarRange")) {
-            try {
-                this.lidarRange = (float) parameters.get("lidarRange");
-            } catch (ClassCastException e) {
-                System.err.println("Invalid value for parameter 'lidarRange'.");
-            }
-        }
     }
 
     @Override
@@ -67,15 +58,7 @@ public class LidarSensor extends Sensor {
     }
 
     @Override
-    public float getHeight() {
+    public Float getHeight() {
         return this.calculateAppliedErrors(SimulationController.getInputSignal().getHeight());
     }
-
-//    @Override
-//    public void addError(ErrorModel error) {
-//        if (!allowedErrors.contains(error.getClass())) {
-//            throw new IllegalArgumentException("This error model is not allowed for LIDAR Sensor.");
-//        }
-//        super.addError(error);
-//    }
 }

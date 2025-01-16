@@ -49,7 +49,9 @@ public class FormalizedMajorityVoting extends VotingAlgorithm {
     public float vote(ArrayList<Sensor> sensors) {
         ArrayList<Float> sensorOutputs = new ArrayList<>();
         for (Sensor sensor : sensors) {
-            sensorOutputs.add(sensor.getHeight());
+            Float height = sensor.getHeight();
+            if (height != null)
+                sensorOutputs.add(height);
         }
 
         // Step 1: Partition outputs into clusters based on the closeness threshold

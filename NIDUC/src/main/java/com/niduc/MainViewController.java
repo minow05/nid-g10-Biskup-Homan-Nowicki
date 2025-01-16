@@ -49,6 +49,8 @@ public class MainViewController {
     @FXML public Label simulationCurrentSpeed;
     @FXML public LineChart<Integer, Float> votedChart;
     @FXML public LineChart<Integer, Float> sensorsChart;
+    @FXML public CheckBox highAltitudeTestCheckBox;
+    private final ArrayList<Button> sensorsDeleteButtons = new ArrayList<>();
     private XYChart.Series<Integer, Float> heightSeries1;
     private XYChart.Series<Integer, Float> heightSeries2;
     private XYChart.Series<Integer, Float> votedHeightSeries;
@@ -78,6 +80,9 @@ public class MainViewController {
         simulationSpeedSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             SimulationController.setSimulationFramerate(newValue.intValue());
             simulationCurrentSpeed.setText(String.valueOf(newValue.intValue()));
+        });
+        highAltitudeTestCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            SimulationController.getInputSignal().setIsHighAltitudeTest(newValue);
         });
         this.initializeVotingAlgorithmComboBox();
         this.initializeSensorTypeComboBox();
@@ -138,11 +143,12 @@ public class MainViewController {
             this.isPaused = false;
             this.pauseButton.setDisable(false);
             this.pauseButton.setText("Pause");
-            this.sensorsGridPane.setDisable(true);
             this.sensorAddButton.setDisable(true);
             this.votingAlgorithmComboBox.setDisable(true);
             this.votingAlgorithmParametersGridPane.setDisable(true);
-            this.closeSensorEdit(null);
+            this.highAltitudeTestCheckBox.setDisable(true);
+            for (Button sensorDeleteButtons: this.sensorsDeleteButtons)
+                sensorDeleteButtons.setDisable(true);
             this.initializeGraphs();
             SimulationController.setup();
             SimulationController.run();
@@ -153,10 +159,12 @@ public class MainViewController {
         this.isPaused = false;
         this.pauseButton.setDisable(true);
         this.pauseButton.setText("Pause");
-        this.sensorsGridPane.setDisable(false);
         this.sensorAddButton.setDisable(false);
         this.votingAlgorithmComboBox.setDisable(false);
         this.votingAlgorithmParametersGridPane.setDisable(false);
+        this.highAltitudeTestCheckBox.setDisable(false);
+        for (Button sensorDeleteButtons: this.sensorsDeleteButtons)
+            sensorDeleteButtons.setDisable(false);
         SimulationController.stop();
     }
 
@@ -227,7 +235,8 @@ public class MainViewController {
             errorGridPane.setVgap(10);
             errorGridPane.add(new Label("Error type: "), 0, 0);
             errorGridPane.add(new Label(selectedSensorAppliedError.getDisplayName()), 1, 0);
-            Label errorDescriptionLabel = new Label(selectedSensorAppliedError.getDescription());
+            Text errorDescriptionLabel = new Text(selectedSensorAppliedError.getDescription());
+            errorDescriptionLabel.setWrappingWidth(300);
             GridPane.setColumnSpan(errorDescriptionLabel, 3);
             errorGridPane.add(errorDescriptionLabel, 0, 1);
             ArrayList<Parameter> errorParameters = selectedSensorAppliedError.getParameters();
@@ -282,6 +291,7 @@ public class MainViewController {
 
     public void updateSensors() {
         this.sensorsGridPane.getChildren().clear();
+        this.sensorsDeleteButtons.clear();
         this.sensorReadingLabels = new ArrayList<>();
         ArrayList<Sensor> sensorsList = SimulationController.getSensors();
         for (int i = 0; i < sensorsList.size(); i++) {
@@ -298,6 +308,8 @@ public class MainViewController {
             Button sensorDeleteButton = new Button("Delete");
             sensorDeleteButton.setOnAction(event -> deleteSensor(final_i));
             sensorDeleteButton.styleProperty().set("-fx-text-fill: #770000");
+            sensorDeleteButton.setDisable(this.isRunning);
+            sensorsDeleteButtons.add(sensorDeleteButton);
 
             this.sensorsGridPane.add(nameLabel, 0, i);
             this.sensorsGridPane.add(sensorTypeLabel, 1, i);
@@ -342,7 +354,6 @@ public class MainViewController {
             this.sensorsSeries.add(sensorSeries);
             this.sensorsChart.getData().add(sensorSeries);
         }
-//        updateGraphs();
     }
 
     public void updateGraphs() {

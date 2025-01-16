@@ -71,7 +71,7 @@ public abstract class Sensor {
 
     public abstract Sensor getNewInstance();
 
-    public abstract float getHeight();
+    public abstract Float getHeight();
 
     public String getDisplayHeight() {
         return String.valueOf(getHeight()) + " ft";
