@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BarometricSensor extends Sensor {
-    public static final String displayName = "Barometric Sensor";
+    public static final String displayName = "Barometric Altimeter";
     public static final String description = "Barometric sensor for measuring atmospheric pressure.";
     public static final ArrayList<ErrorModel> allowedErrors = new ArrayList<>() {{
         add(new BarometricSensorTemperatureVariationError());

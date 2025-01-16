@@ -27,7 +27,7 @@ public class InputSignal {
         else if (time >= 200 && time < 500)
             this.height = 2500;
         else if (time >= 500 && time < 700)
-            this.height = 81000 - 45 * time;
+            this.height = 8750 - 12.5f * time;
         else
             this.height = 0;
     }

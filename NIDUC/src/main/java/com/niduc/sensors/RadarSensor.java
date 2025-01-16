@@ -10,8 +10,10 @@ import java.util.Map;
 
 public class RadarSensor extends Sensor {
     public static final String displayName = "Radar Sensor";
-    public static final String description = "Radar sensor for measuring distance using radio waves.";
+    public static final String description = "Radar sensor for measuring distance using radio waves. Limited height of 2800ft.";
     public static final ArrayList<ErrorModel> allowedErrors = new ArrayList<>() {{
+        add(new RadarSensorSignalAttenuationError());
+        add(new RadarSensorSurfaceTypeError());
         add(new BiasError());
         add(new ConstantValueError());
         add(new DriftError());

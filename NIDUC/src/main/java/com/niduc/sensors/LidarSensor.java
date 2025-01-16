@@ -9,9 +9,11 @@ import java.util.List;
 import java.util.Map;
 
 public class LidarSensor extends Sensor {
-    public static final String displayName = "LIDAR Sensor";
+    public static final String displayName = "LIDAR Altimeter";
     public static final String description = "LIDAR sensor for measuring distance using laser.";
     public static final ArrayList<ErrorModel> allowedErrors = new ArrayList<>() {{
+        add(new LidarSensorAtmosphericError());
+        add(new LidarSensorReflectivityError());
         add(new BiasError());
         add(new ConstantValueError());
         add(new DriftError());

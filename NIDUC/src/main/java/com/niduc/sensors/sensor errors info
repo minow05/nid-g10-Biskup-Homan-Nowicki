@@ -24,8 +24,8 @@ Potential Errors:
 
 Multipath Propagation: Radio waves may bounce off surrounding structures or terrain, leading to incorrect readings.
 Signal Attenuation: Rain, snow, or fog can weaken the signal, causing errors in height detection.
-Frequency Drift: Changes in frequency due to hardware imperfections or environmental factors can affect accuracy.
 Surface Type: Absorptive surfaces like water or uneven terrain might not reflect signals accurately.
+Frequency Drift: Changes in frequency due to hardware imperfections or environmental factors can affect accuracy.
 Example:
 
 A radar altimeter on a helicopter flying over rough terrain may show an altitude error of ±10 feet due to multipath effects from nearby rocks.
