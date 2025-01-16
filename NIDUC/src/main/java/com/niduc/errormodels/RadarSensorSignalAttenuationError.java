@@ -11,9 +11,9 @@ public class RadarSensorSignalAttenuationError extends ErrorModel {
     public static final String displayName = "Signal Attenuation Error (Radar)";
     public static final String description = "Simulates errors caused by rain, snow, or fog attenuating the signal strength, leading to inaccuracies in height detection.";
 
-    private float rainFactor = 0.1f;
-    private float snowFactor = 0.2f;
-    private float fogFactor = 0.15f;
+    private float rainFactor = 0.01f;
+    private float snowFactor = 0.02f;
+    private float fogFactor = 0.015f;
     private boolean isRainy = false;
     private boolean isSnowy = false;
     private boolean isFoggy = false;

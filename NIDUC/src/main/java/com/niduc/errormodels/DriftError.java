@@ -1,6 +1,7 @@
 package com.niduc.errormodels;
 
 import com.niduc.Parameter;
+import com.niduc.SimulationController;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -13,9 +14,8 @@ public class DriftError extends ErrorModel {
     public String getDisplayName() { return displayName; }
     public String getDescription() { return description; }
 
-    private float driftRate = 0.1f; // Default drift rate (meters per second)
-    private float maxDrift = 10f;   // Maximum drift allowed
-    private float accumulatedDrift = 0f; // Tracks the current drift
+    private float driftRate = 0.1f;
+    private float maxDrift = 10f;
     private static final ArrayList<Parameter> parameters = new ArrayList<>() {{
         add(new Parameter("driftRate", Float.class, "Rate of drift (feet per second)"));
         add(new Parameter("maxDrift", Float.class, "Maximum allowed drift (feet)"));
@@ -56,10 +56,7 @@ public class DriftError extends ErrorModel {
 
     @Override
     public float getErrorValue(float inputValue) {
-        // Increment the accumulated drift by the drift rate, but cap it at maxDrift
-        accumulatedDrift = Math.min(accumulatedDrift + driftRate, maxDrift);
-        // Apply the drift to the input value
-        return inputValue + accumulatedDrift;
+        return inputValue + Math.max(Math.min(SimulationController.getTime() * driftRate, maxDrift), -maxDrift);
     }
 
     @Override

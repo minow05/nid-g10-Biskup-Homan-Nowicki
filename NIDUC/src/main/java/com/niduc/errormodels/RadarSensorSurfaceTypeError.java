@@ -11,8 +11,8 @@ public class RadarSensorSurfaceTypeError extends ErrorModel {
     public static final String displayName = "Surface Type Error (Radar)";
     public static final String description = "Simulates errors caused by reflective or absorptive surface types, such as water or uneven terrain, affecting signal accuracy.";
 
-    private float waterReflectionFactor = 0.9f;
-    private float unevenTerrainFactor = 1.1f;
+    private float waterReflectionFactor = 0.02f;
+    private float unevenTerrainFactor = 0.02f;
     private boolean isOverWater = false;
     private boolean isOverUnevenTerrain = false;
 
@@ -53,12 +53,12 @@ public class RadarSensorSurfaceTypeError extends ErrorModel {
     @Override
     public float getErrorValue(float inputValue) {
         float height = SimulationController.getInputSignal().getHeight();
-        float attenuation = 1.0f;
+        float error = 1.0f;
 
-        if (isOverWater) attenuation += new Random().nextFloat() * waterReflectionFactor;
-        if (isOverUnevenTerrain) attenuation -= new Random().nextFloat() * unevenTerrainFactor;
+        if (isOverWater) error += new Random().nextFloat() * waterReflectionFactor;
+        if (isOverUnevenTerrain) error -= new Random().nextFloat() * unevenTerrainFactor;
 
-        return inputValue * Math.max(attenuation, 0.5f);
+        return inputValue * error;
     }
 
     @Override

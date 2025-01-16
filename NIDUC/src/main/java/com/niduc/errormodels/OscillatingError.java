@@ -16,7 +16,7 @@ public class OscillatingError extends ErrorModel {
     private float amplitude = 5f; // Default oscillation amplitude
     private float frequency = 1f; // Default oscillation frequency (cycles per second)
     private static final ArrayList<Parameter> parameters = new ArrayList<>() {{
-        add(new Parameter("amplitude", Float.class, "Amplitude of the oscillation (meters)"));
+        add(new Parameter("amplitude", Float.class, "Amplitude of the oscillation (feet)"));
         add(new Parameter("frequency", Float.class, "Frequency of the oscillation (cycles per second)"));
     }};
 
@@ -54,13 +54,10 @@ public class OscillatingError extends ErrorModel {
 
     @Override
     public float getErrorValue(float inputValue) {
-        // Get the current simulation time
         float currentTime = SimulationController.getTime();
 
-        // Calculate the oscillating error using a sine wave
         float oscillation = (float) (amplitude * Math.sin(2 * Math.PI * frequency * currentTime));
 
-        // Add the oscillation to the input value
         return inputValue + oscillation;
     }
 
