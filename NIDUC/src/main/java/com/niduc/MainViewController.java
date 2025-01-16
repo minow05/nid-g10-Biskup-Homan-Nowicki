@@ -10,6 +10,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -25,9 +26,7 @@ public class MainViewController {
 
     @FXML public Button sensorAddButton;
 
-    @FXML public Button algorithmChangeButton;
 
-    @FXML public Button signalChangeButton;
     @FXML public ComboBox<VotingAlgorithm> votingAlgorithmComboBox;
     @FXML public GridPane votingAlgorithmParametersGridPane;
     @FXML public Text votingAlgorithmDescription;
@@ -50,6 +49,7 @@ public class MainViewController {
     @FXML public LineChart<Integer, Float> votedChart;
     @FXML public LineChart<Integer, Float> sensorsChart;
     @FXML public CheckBox highAltitudeTestCheckBox;
+    @FXML public BorderPane borderPane;
     private final ArrayList<Button> sensorsDeleteButtons = new ArrayList<>();
     private XYChart.Series<Integer, Float> heightSeries1;
     private XYChart.Series<Integer, Float> heightSeries2;
@@ -83,6 +83,9 @@ public class MainViewController {
         });
         highAltitudeTestCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
             SimulationController.getInputSignal().setIsHighAltitudeTest(newValue);
+        });
+        borderPane.heightProperty().addListener((obs, oldVal, newVal) -> {
+            updateGraphsSize();
         });
         this.initializeVotingAlgorithmComboBox();
         this.initializeSensorTypeComboBox();
@@ -364,5 +367,13 @@ public class MainViewController {
         this.votedHeightSeries.getData().add(new XYChart.Data<>(currentTime, SimulationController.getVotedValue()));
         for (int i = 0; i < sensorsList.size(); i++)
             this.sensorsSeries.get(i).getData().add(new XYChart.Data<>(currentTime, sensorsList.get(i).getHeight()));
+    }
+
+    public void updateGraphsSize() {
+        double graphHeight = (this.borderPane.getHeight() * 0.9) / 2;
+        votedChart.setMinHeight(graphHeight);
+        votedChart.setMaxHeight(graphHeight);
+        sensorsChart.setMinHeight(graphHeight);
+        sensorsChart.setMaxHeight(graphHeight);
     }
 }

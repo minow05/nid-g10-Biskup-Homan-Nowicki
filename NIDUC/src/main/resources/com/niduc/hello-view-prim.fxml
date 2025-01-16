@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.control.CheckBox?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.niduc.MainViewController">
+<BorderPane fx:id="borderPane" xmlns:fx="http://javafx.com/fxml" fx:controller="com.niduc.MainViewController">
     <left>
         <VBox spacing="10" style="-fx-padding: 10;" maxWidth="500">
             <Label text="Simulation controls:" style="-fx-font-weight: bold; -fx-font-size: 20px"/>
